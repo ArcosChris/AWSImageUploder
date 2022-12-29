@@ -1,0 +1,27 @@
+package com.arcostechnology.awsimageupload.config;
+
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AmazonConfig {
+
+    @Bean
+    public AmazonS3 s3(){
+        AWSCredentials awsCredentials = new BasicAWSCredentials(
+                "", //need to add access key from AWS security credentials
+                          "" // need to add secret key from AWS security credentials
+        );
+
+        return AmazonS3ClientBuilder
+                .standard()
+                .withRegion("") //add region for s3 bucket here
+                .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
+                .build();
+    }
+}
